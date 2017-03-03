@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+        	body{
+        		font-size: 18px;
+        		font-family: 微软雅黑;
+        	}
+        	strong{
+        		margin-right: 40px;
+        		font-weight: bold;
+        	}
+        	input{
+        		width: 200px;
+        		height: 25px;
+        		border: 1px solid #999;
+        		border-radius: 5px;
+        		color:#666;
+        		font-size: 18px;
+        	}
+        	button{
+        		width: 75px;
+        		height: 30px;
+        		border: none;
+        		border-radius: 5px;
+        		background: #2F79BA;
+        		color:#fff;
+        		cursor: pointer;
+        		font-size: 15px;
+        		font-weight: bold;
+        	}
+        	span{
+        		color: #999;
+        		font-size: 14px;
+        		margin-left: 80px;
+        	}
+        </style>
+    </head>
+    <body>
+    	<strong>名称</strong>
+    	<input type="text"> 
+    	<br>
+    	<span></span><br>
+
+    	<strong>密码</strong>
+    	<input type="password"> 
+    	<br>
+    	<span></span><br>
+
+    	<strong style="margin-right: 5px">密码确认</strong>
+    	<input type="password"> 
+    	<br>
+    	<span></span><br>
+
+    	<strong>邮箱</strong>
+    	<input type="text" name=""> 
+    	<br>
+    	<span></span><br>
+
+    	<strong>手机</strong>
+    	<input type="text" name=""> 
+    	<br>
+    	<span></span><br>
+		<button>提交</button>
+
+    	<script type="text/javascript">
+    		var aInput = document.getElementsByTagName('input');
+    		var aSpan = document.getElementsByTagName('span');
+    		var oBtn = document.getElementsByTagName('button')[0];
+    		
+    		nameValidator();
+    		passwordValidator();
+    		confirmValidator();
+    		emailValidator();
+    		phoneValidator();
+
+    		oBtn.onclick = function(){
+    			for(var i=0;i<aSpan.length;i++){
+    				aInput[i].focus();
+    				aInput[i].blur();
+    			}
+    			for (var i = 0; i < aInput.length; i++) {        
+           			if (aInput[i].style.borderColor != 'green') {  
+                	alert('提交失败');  
+               		 return;  
+           			}  
+       		 	}  
+        		alert('提交成功');
+    		}
+
+    		//获取input内容的长度
+    		function getLen(value){
+    			var len = 0;
+    			for(var i=0;i<value.length;i++){
+    				if (value.charCodeAt(i) > 255){
+    					len += 2;
+    				}else{
+    					len++;
+    				}
+    			}
+    			return len;
+    		}
+
+    		//修改input边框和提示的颜色
+    		function changeColor(input,span,flag){
+    			if(flag){
+    				input.style.border = '1px solid green';
+    				span.style.color = 'green';
+    			}else{
+    				input.style.border = '1px solid red';
+    				span.style.color = 'red';
+    			}
+    		}
+    		
+    		//姓名验证
+    		function nameValidator(){ 
+    			aInput[0].onfocus = function(){
+    				aSpan[0].innerHTML = '必填，长度为4~16个字符';
+    			}
+    			aInput[0].onblur = function(){
+    				var len = getLen(aInput[0].value);
+    				if(len==0){
+    					aSpan[0].innerHTML = '姓名不能为空';
+    					changeColor(aInput[0],aSpan[0],false);
+    				}else if(len >= 4 && len <= 16){
+    					aSpan[0].innerHTML = '名称格式正确';
+    					changeColor(aInput[0],aSpan[0],true);
+    				}else{
+    					aSpan[0].innerHTML = '姓名格式不符合要求';
+    					changeColor(aInput[0],aSpan[0],false);
+    				}
+    			}
+    		}
+
+    		//密码验证
+    		function passwordValidator(){
+    			aInput[1].onfocus = function(){
+    				aSpan[1].innerHTML = '必填，长度为6~16位';
+    			}
+    			aInput[1].onblur = function(){
+    				var len = getLen(aInput[1].value);
+    				if(len==0){
+    					aSpan[1].innerHTML = '密码不能为空';
+    					changeColor(aInput[1],aSpan[1],false);
+    				}else if(len >= 6 && len <= 16){
+    					aSpan[1].innerHTML = '密码可用';
+    					changeColor(aInput[1],aSpan[1],true);
+    				}else{
+    					aSpan[1].innerHTML = '密码长度为6~16位';
+    					changeColor(aInput[1],aSpan[1],false);
+    				}
+    			}
+    		}
+
+    		//密码再次验证
+    		function confirmValidator(){
+    			aInput[2].onfocus = function(){
+    				aSpan[2].innerHTML = '再次输入相同密码';
+    			}
+    			aInput[2].onblur = function(){
+    				var len = getLen(aInput[2].value);
+    				if(len==0){
+    					aSpan[2].innerHTML = '确认密码不能为空';
+    					changeColor(aInput[2],aSpan[2],false);
+    				}else if(aInput[1].value == aInput[2].value){
+    					aSpan[2].innerHTML = '两次密码输入一致';
+    					changeColor(aInput[2],aSpan[2],true);
+    				}else{
+    					aSpan[2].innerHTML = '密码输入不一致';
+    					changeColor(aInput[2],aSpan[2],false);
+    				}
+    			}
+    		}
+    		
+    		//邮箱验证
+    		function emailValidator(){
+    			aInput[3].onfocus = function(){
+    				aSpan[3].innerHTML = '请输入邮箱地址';
+    			}
+    			aInput[3].onblur = function(){
+    				var len = getLen(aInput[3].value);
+    				var reg=/^[a-z0-9](\w|\.|-)*@([a-z0-9]+-?[a-z0-9]+\.){1,3}[a-z]{2,4}$/i;
+    				if(len==0){
+    					aSpan[3].innerHTML = '邮箱不能为空';
+    					changeColor(aInput[3],aSpan[3],false);
+    				}else if(reg.test(aInput[3].value)){
+    					aSpan[3].innerHTML = '邮箱正确';
+    					changeColor(aInput[3],aSpan[3],true);
+    				}else{
+    					aSpan[3].innerHTML = '邮箱格式错误';
+    					changeColor(aInput[3],aSpan[3],false);
+    				}
+    			}
+    		}
+
+    		//手机号验证
+    		function phoneValidator(){   			
+    			aInput[4].onfocus = function(){
+    				aSpan[4].innerHTML = '请输入您的手机号';
+    			}
+    			aInput[4].onblur = function(){
+    				var len = getLen(aInput[4].value);
+    				var reg  = /^1[34578]\d{9}$/;
+    				if(len==0){
+    					aSpan[4].innerHTML = '手机号不能为空';
+    					changeColor(aInput[4],aSpan[4],false);
+    				}else if(reg.test(aInput[4].value)){
+    					aSpan[4].innerHTML = '手机号正确';
+    					changeColor(aInput[4],aSpan[4],true);
+    				}else{
+    					aSpan[4].innerHTML = '手机号格式错误';
+    					changeColor(aInput[4],aSpan[4],false);
+    				}
+    			}
+    		}
+
+
+
+
+    		
+    	</script>
+    </body>
+</html>
