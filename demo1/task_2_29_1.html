@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+        	body{
+        		font-size: 18px;
+        		font-family: 微软雅黑;
+        	}
+        	strong{
+        		
+        		font-weight: bold;
+        	}
+        	input{
+        		width: 200px;
+        		height: 25px;
+        		border: 1px solid #999;
+        		border-radius: 5px;
+        		color:#666;
+        		font-size: 18px;
+        	}
+        	button{
+        		width: 75px;
+        		height: 30px;
+        		border: none;
+        		border-radius: 5px;
+        		background: #2F79BA;
+        		color:#fff;
+        		cursor: pointer;
+        		font-size: 15px;
+        		font-weight: bold;
+        	}
+        	span{
+        		color: #999;
+        		font-size: 14px;
+        		margin-left: 40px;
+        	}
+        </style>
+    </head>
+    <body>
+    	<strong>名称</strong>
+    	<input id="text" type="text" name=""> 
+    	<button>验证</button> <br>
+    	<span>必填，长度为4~16个字符</span>	
+
+    	<script type="text/javascript">
+    		var oInput = document.getElementById("text");
+    		var oBtn = document.getElementsByTagName('button')[0];
+    		var oSpan = document.getElementsByTagName('span')[0];
+    		var str;
+    		var arr;
+    		var len;
+
+    		oBtn.onclick = function(){
+    			len = 0;
+    			str = oInput.value;
+    			arr = str.split("");
+
+    			for(var i = 0;i<str.length;i++){
+    				if(arr[i].charCodeAt()>0x00 && arr[i].charCodeAt()<0xFF){
+    					len++;
+    				}else{
+    					len += 2;
+    				}
+    			}
+    			
+    			if(len>=4 && len<=16){
+    				oInput.style.borderColor = "green";
+    				oSpan.style.color = "green";
+    				oSpan.innerHTML = "名称格式正确";
+    			} else if(len == 0){
+    				oInput.style.borderColor = "red";
+    				oSpan.style.color = "red";
+    				oSpan.innerHTML = "姓名不能为空";
+    			}else{
+    				oInput.style.borderColor = "red";
+    				oSpan.style.color = "red";
+    				oSpan.innerHTML = "姓名格式不符合要求";
+    			}
+    		}
+    	</script>
+    </body>
+</html>
