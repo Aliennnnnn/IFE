@@ -29,7 +29,7 @@
     	<form>
     		<label for="student">在校生</label>
     			<input id="student" class="people" type="radio" name="people" >
-    		<label for="notstudent">在校生</label>
+    		<label for="notstudent">非在校生</label>
     			<input id="notstudent" class="people" type="radio" name="people" >
     		<div id="school">
     			<label>学校</label>
@@ -79,6 +79,7 @@
     			judgeRadio();
     		};
 
+
     		var data = {
     			bj:["北京大学","清华大学","中国人民大学","北京航空航天大学"],
     			sh:["复旦大学","上海交通大学","同济大学","华东理工大学"]
@@ -93,7 +94,7 @@
     		function change(){
     			//获取城市名id
     			var id = options[oCity.selectedIndex].getAttribute("id");
-    			
+
     			var	content = "";
 				for(var j = 0;j<data[id].length;j++){
 					content += "<option>" + data[id][j] + "</option>";
