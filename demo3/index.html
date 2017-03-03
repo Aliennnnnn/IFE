@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+        	body{
+        		font-size: 16px;
+        		font-family: Microsoft Yahei;
+        	}
+        	select,#company{
+        		border: 1px solid #999;
+        		border-radius: 3px;
+        		height: 25px;
+        		color: #666;
+        		font-family: Microsoft Yahei;
+        		margin-right: 15px;
+        	}
+        	#school{
+        		margin-top: 50px;
+        	}
+        	#outSchool{
+        		margin-top: 50px;
+        		display: none;
+        	}
+
+        </style>
+    </head>
+    <body>
+    	<form>
+    		<label for="student">在校生</label>
+    			<input id="student" class="people" type="radio" name="people" >
+    		<label for="notstudent">在校生</label>
+    			<input id="notstudent" class="people" type="radio" name="people" >
+    		<div id="school">
+    			<label>学校</label>
+    			<select id="city">
+    				<option class="opt" id="bj">北京</option>
+    				<option class="opt" id="sh">上海</option>
+    			</select>
+    			<select id="college">
+    				<option>北京大学</option>
+    				<option>清华大学</option>
+    				<option>中国人民大学</option>
+    				<option>北京航空航天大学</option>
+    			</select>
+    		</div>
+    		<div id="outSchool">
+    			<label for="company">就业单位</label>
+    				<input type="text" id="company">
+    		</div>
+    	</form>
+
+    	<script type="text/javascript">
+    		var oStu = document.getElementById('student');
+    		var oNotStu = document.getElementById('notStudent');
+    		var aPeop = document.getElementsByClassName('people');
+    		var oSchool = document.getElementById('school');
+    		var oOutSchool = document.getElementById('outSchool');
+    		var oCity = document.getElementById('city');
+    		var oCollage = document.getElementById('college')
+
+    		//判断单选按钮是否被选中
+    		
+    		function judgeRadio(){   			
+    			if (aPeop[0].checked) {
+    				oSchool.style.display = 'block';
+    				oOutSchool.style.display = 'none';
+    			} else if(aPeop[1].checked){
+    				oSchool.style.display = 'none';
+    				oOutSchool.style.display = 'block';
+    			}
+
+    		}
+    		
+    		aPeop[0].onclick = function(){
+    			judgeRadio();
+    		};
+    		aPeop[1].onclick = function(){
+    			judgeRadio();
+    		};
+
+    		var data = {
+    			bj:["北京大学","清华大学","中国人民大学","北京航空航天大学"],
+    			sh:["复旦大学","上海交通大学","同济大学","华东理工大学"]
+    		}
+
+    		//城市名改变时触发change函数
+    		oCity.addEventListener("change",change)
+
+    		//获得城市名数组
+    		var options = document.getElementsByClassName('opt');
+
+    		function change(){
+    			//获取城市名id
+    			var id = options[oCity.selectedIndex].getAttribute("id");
+    			
+    			var	content = "";
+				for(var j = 0;j<data[id].length;j++){
+					content += "<option>" + data[id][j] + "</option>";
+				}
+				oCollage.innerHTML = content;
+    		}
+    	</script>
+    </body>
+</html>
