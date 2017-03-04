@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<style type="text/css">
+			*{
+				margin:0;
+				padding: 0;
+				font-family: Microsoft Yahei;
+			}
+			#box{
+				width: 500px;
+				height: 500px;
+				border: 2px solid #000;
+				margin: 0 auto;
+				position: relative;
+			}
+			span{
+				width: 50px;
+				height: 50px;
+				display: inline-block;
+				border: 1px solid #999;
+				box-sizing: border-box;
+				float: left;
+			}
+			#diamond{
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				left: 0px;
+				top:0px;
+			}
+			.blue,.red{
+				width: 50px;
+				display: inline-block;
+				border: none;
+			}
+			.blue{
+				width: 15px;
+				background-color: blue;
+			}
+			.red{
+				width: 35px;
+				background-color: red;
+			}
+			input{
+				margin-top: 20px;
+				height: 30px;
+				border: 2px solid #999;
+				border-radius: 5px;
+				font-size: 25px;
+				color: #666;
+			}
+			button{
+				height: 30px;
+				width: 60px;
+				font-size: 20px;
+				color: #666;
+			}
+		</style>
+    </head>
+    <body>
+    	<div id="box"> 
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+		<span></span><span></span><span></span><span></span><span></span>
+
+			<div id="diamond">
+				<span class="red"></span>
+				<span class="blue"></span>				
+			</div>
+			<input type="text" id="command">
+			<button>执行</button>
+    	</div>
+
+    	<script type="text/javascript">
+    		var oDia = document.getElementById('diamond');
+    		var oBtn = document.getElementsByTagName('button')[0];
+    		var oCom = document.getElementById('command');    		
+    		
+    		//向屏幕的左/右侧移动一格，方向不变
+    		var m = 0;
+    		function traL(){
+    			m--;
+    			var left = parseInt(oDia.offsetLeft);
+    			if( left > 0 ){
+    				oDia.style.left = m*50 + 'px';
+    			}
+    		}
+    		function traR(){
+    			m++;
+    			var left = parseInt(oDia.offsetLeft);
+    			if( left < 450 ){
+    				oDia.style.left = m*50 + 'px';
+    			}
+    		}
+
+    		//向屏幕的上/下面移动一格，方向不变
+    		var n = 0;
+    		function traT(){
+    			n--;
+    			var top = parseInt(oDia.offsetTop);
+    			if( top > 0 ){
+    				oDia.style.top = n*50 + 'px';
+    			}
+    		}
+    		function traB(){
+    			n++;
+    			var top = parseInt(oDia.offsetTop);
+    			if( top < 450 ){
+    				oDia.style.top = n*50 + 'px';
+    			} 
+    		}
+
+    		//方向转向屏幕左/右/上/下侧，并向屏幕的左/右/上/下侧移动一格
+    		function movL(){
+    			oDia.style.transform = 'rotate(180deg)';
+    			traL();
+    		}
+    		function movR(){
+    			oDia.style.transform = 'rotate(0deg)';
+    			traR();
+    		}
+    		function movT(){
+    			oDia.style.transform = 'rotate(270deg)';
+    			traT();
+    		}
+    		function movB(){
+    			oDia.style.transform = 'rotate(90deg)';
+    			traB();
+    		}
+
+    		
+    		
+    		oBtn.onclick = function(){
+    			var value = oCom.value;
+    			switch(value){
+    				case "TRA LEF":
+    					traL();
+    					break;
+    				case "TRA RIG":
+    					traR();
+    					break;
+    				case "TRA TOP":
+    					traT();
+    					break;
+    				case "TRA BOT":
+    					traB();
+    					break;
+    				case "MOV LEF":
+    					movL();
+    					break;
+    				case "MOV RIG":
+    					movR();
+    					break;
+    				case "MOV TOP":
+    					movT();
+    					break;
+    				case "MOV BOT":
+    					movB();
+    					break;
+			    }
+    		}
+    		
+    		</script>
+    </body>
+</html>
