@@ -93,7 +93,9 @@
     	<script type="text/javascript">
     		var oDia = document.getElementById('diamond');
     		var oBtn = document.getElementsByTagName('button')[0];
-    		var oCom = document.getElementById('command');    		
+    		var oCom = document.getElementById('command');    
+
+            //var timer = setInterval()		
     		
     		//向屏幕的左/右侧移动一格，方向不变
     		var m = 0;
@@ -101,6 +103,7 @@
     			m--;
     			var left = parseInt(oDia.offsetLeft);
     			if( left > 0 ){
+                    oDia.style.transition = 'left 1s';
     				oDia.style.left = m*50 + 'px';
     			}
     		}
@@ -108,6 +111,7 @@
     			m++;
     			var left = parseInt(oDia.offsetLeft);
     			if( left < 450 ){
+                    oDia.style.transition = 'left 1s';
     				oDia.style.left = m*50 + 'px';
     			}
     		}
@@ -118,6 +122,7 @@
     			n--;
     			var top = parseInt(oDia.offsetTop);
     			if( top > 0 ){
+                    oDia.style.transition = 'top 1s';
     				oDia.style.top = n*50 + 'px';
     			}
     		}
@@ -125,25 +130,31 @@
     			n++;
     			var top = parseInt(oDia.offsetTop);
     			if( top < 450 ){
+                    oDia.style.transition = 'top 1s';
     				oDia.style.top = n*50 + 'px';
     			} 
     		}
 
     		//方向转向屏幕左/右/上/下侧，并向屏幕的左/右/上/下侧移动一格
     		function movL(){
+                oDia.style.transition = 'left 1s,transform 1s';
     			oDia.style.transform = 'rotate(180deg)';
     			traL();
     		}
     		function movR(){
+                oDia.style.transition = 'left 1s,transform 1s';
     			oDia.style.transform = 'rotate(0deg)';
     			traR();
     		}
     		function movT(){
+                oDia.style.transition = 'transform 1s,top 1s';
     			oDia.style.transform = 'rotate(270deg)';
     			traT();
     		}
     		function movB(){
-    			oDia.style.transform = 'rotate(90deg)';
+                oDia.style.transition = 'top 1s';
+                oDia.style.transition = 'transform 1s,top 1s';
+    			oDia.style.transform = 'rotate(90deg)';               
     			traB();
     		}
 
