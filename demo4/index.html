@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<style type="text/css">
+			*{
+				margin:0;
+				padding: 0;
+				font-family: Microsoft Yahei;
+			}
+			#box{
+				width: 500px;
+				height: 500px;
+				border: 2px solid #000;
+				margin: 0 auto;
+				position: relative;
+			}
+			span{
+				width: 50px;
+				height: 50px;
+				display: inline-block;
+				border: 1px solid #999;
+				box-sizing: border-box;
+				float: left;
+			}
+			#diamond{
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				left: 0px;
+				top:0px;
+			}
+			.blue,.red{
+				width: 50px;
+				display: inline-block;
+				border: none;
+			}
+			.blue{
+				width: 15px;
+				background-color: blue;
+			}
+			.red{
+				width: 35px;
+				background-color: red;
+			}
+			input{
+				margin-top: 20px;
+				height: 30px;
+				border: 2px solid #999;
+				border-radius: 5px;
+				font-size: 25px;
+				color: #666;
+			}
+			button{
+				height: 30px;
+				width: 60px;
+				font-size: 20px;
+				color: #666;
+			}
+		</style>
+    </head>
+    <body>
+    	<div id="box"> 
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+    		<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<span></span><span></span><span></span><span></span><span></span>
+			<div id="diamond">
+				<span class="red"></span>
+				<span class="blue"></span>				
+			</div>
+			<input type="text" id="command">
+			<button>执行</button>
+    	</div>
+
+    	<script type="text/javascript">
+    		var oDia = document.getElementById('diamond');
+    		var oBtn = document.getElementsByTagName('button')[0];
+    		var oCom = document.getElementById('command');    		
+    		var current = 0;
+    		var i = 0;
+    		var	j = 0;
+
+    		function tunL(){
+    			current = (current+90)%360;            
+                oDia.style.transform = 'rotate('+current+'deg)';
+    		}
+
+    		function tunR(){
+    			current = (current-90)%360;            
+                oDia.style.transform = 'rotate('+current+'deg)';
+    		}
+
+    		function tunB(){
+    			current = (current+180)%360;            
+                oDia.style.transform = 'rotate('+current+'deg)';
+    		}
+
+    		function go(){
+    			var deg = oDia.style.transform.slice(7,-4); 
+    			var left = parseInt(oDia.offsetLeft);
+    			var top = parseInt(oDia.offsetTop);
+
+    			if(deg == 0 && left >= 0 && left < 450){   				
+    				i++;   				
+    				oDia.style.left = i*50 + 'px';  				
+    			}else if(deg == 90 && top >= 0 && top < 450){
+    				j++;
+    				oDia.style.top = j*50 + 'px';
+    			}else if(deg == 180 && left > 0 && left <= 450){
+    				i--;
+    				oDia.style.left = i*50 + 'px';
+    			}else if(deg == 270 && top > 0 && top <= 450){
+    				j--;
+    				oDia.style.top = j*50 + 'px';
+    			}
+
+    		}
+    		
+    		
+    		oBtn.onclick = function(){
+    			var value = oCom.value;
+    			switch(value){
+    				case "GO":
+    					go();
+    					break;
+    				case "TUN LEF":
+						tunL();
+						break;
+					case "TUN RIG":
+						tunR();
+						break;
+					case "TUN BAC":
+						tunB();
+						break;
+			    }
+    		}
+    		
+    		</script>
+    </body>
+</html>
